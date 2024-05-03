@@ -35,9 +35,9 @@ app.post('/decrypt',middleware, (req, res) => {
     if (!data.data && !data.encryptedText) {
        return  res.status(400).json({status:"error",message:"Data to decrypt is required"});
     }
-    const decryptedData = service.decryptData(data,null,req.keys);
-    if(decryptedData.includes("Invalid parameters")){
-        return res.status(400).json({status:"error",message:decryptedData})
+    const decryptedData = service.decryptData(data,req.keys);
+    if(!decryptedData){
+        return res.status(400).json({status:"error",message:"invalid parameters for decryption"})
     }
 
     res.status(200).json({status:"success",decryptedData:decryptedData})

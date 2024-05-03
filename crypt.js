@@ -36,7 +36,11 @@ let iv = CryptoJS.enc.Utf8.parse(process.env.CRYPTO_IV);
   }
 };
 
-const decryptData = (encryptedText) => {
+const decryptData = (encryptedText,keys) => {
+  if (keys) {
+    key = CryptoJS.enc.Utf8.parse(keys.key);
+    iv = CryptoJS.enc.Utf8.parse(keys.iv);
+}
     const encryptedtext = encryptedText.data||encryptedText.encryptedText
     if (!encryptedtext) {
         return null;
@@ -55,7 +59,7 @@ if(decryptedText)
     {    return JSON.parse(decryptedText);
 
     }else{
-        return "Invalid parameters passed";
+        return null
     }
   } else {
     return null;
