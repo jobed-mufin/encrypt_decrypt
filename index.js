@@ -30,7 +30,8 @@ app.post('/encrypt',middleware, (req, res) => {
 }
 )
 
-app.post('/decrypt',middleware, (req, res) => {
+app.post('/decrypt',middleware, async(req, res) => {
+   try {
     const data = req.body;
     if (!data.data && !data.encryptedText) {
        return  res.status(400).json({status:"error",message:"Data to decrypt is required"});
@@ -41,6 +42,9 @@ app.post('/decrypt',middleware, (req, res) => {
     }
 
     res.status(200).json({status:"success",decryptedData:decryptedData})
+   } catch (error) {
+    return res.status(400).json({status:"error",message:"invalid key and iv parameters for decryption"})
+   }
 
 }
 )
