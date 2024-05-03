@@ -1,0 +1,14 @@
+.env
+node_modules/
+dist/
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+node_modules
+cdk/cdk.context.json
+.DS_Store
+package-lock.json
+test.rest
+/jest-html-reporters-attach
+jest_html_reporters.html
+*.rest
